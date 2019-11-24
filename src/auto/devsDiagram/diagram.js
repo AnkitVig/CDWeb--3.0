@@ -45,16 +45,21 @@ export default Lang.Templatable("Diagram.DevsDiagram", class DevsDiagram extends
 		this.DrawChanges(state,selection);
 	}
 
-	DrawSVGBorder(selected_id,color) {
-		// Find the new X, Y coordinates of the clicked cell
-	//	console.log(selected_id);
-		if(selected_id!="")
-		{	
-
-			document.getElementById(selected_id).style.stroke = color;
-			document.getElementById(selected_id).style['stroke-width']=5.0;
-		}
+	DrawSVGBorder(selection,color) {
+	
+	
+	var selected_id = selection.selected;
+	//console.log(selected_id);
+	for (var i = 0; i < selected_id.length; i++) {
+		if(document.getElementById(selected_id[i])!=null)
+			{	
+   	document.getElementById(selected_id[i]).style.stroke = color;
+   	document.getElementById(selected_id[i]).style['stroke-width']=2.0;
+   }
 	}
+		
+	}
+
 	Template() {
 
 			   		return "<div class='grid'>" + 
@@ -95,15 +100,15 @@ export default Lang.Templatable("Diagram.DevsDiagram", class DevsDiagram extends
 			this.Node("diagram_hidden").getElementsByTagName("title").hidden = true;
 			
 			this.Node('diagram').innerHTML =this.Node('diagram_hidden').innerHTML;
-
+			this.DrawSVGBorder(selection,'red');
 	}
 	DrawChanges(state,selection)
 	{	
-			//console.log(selection);
+			//console.log(selection.selected);
 			var transitions =this.data.transitions[state.i];
 			//console.log(transitions);
 			
-
+			this.Reset(state);
 			Array.ForEach(transitions, function(t) {
  	 		//console.log(state.model);
  	 		const fill = 'LightSeaGreen';
@@ -112,17 +117,25 @@ export default Lang.Templatable("Diagram.DevsDiagram", class DevsDiagram extends
 			if(document.getElementById(t_id)!=null)
 			{	
 				document.getElementById(t_id).style.fill=fill;
-				//const fillstroke = 'teal';
-
-			 //document.getElementById(t_id).style.stroke = fillstroke;
-			//	document.getElementById(t_id).style['stroke-width']=2.0;
 			
 			}
 			
 			}.bind(this));
-
+			this.DrawSVGBorder(selection,'red');
 		}
-	
+	Reset(state)
+	{
+		//console.log(Object.keys(state.model));
+		var selected_id = Object.keys(state.model);
+	//console.log(selected_id);
+	for (var i = 0; i < selected_id.length; i++) {
+		if(document.getElementById(selected_id[i])!=null)
+			{	
+   	document.getElementById(selected_id[i]).style.fill = 'white';
+ //  	document.getElementById(selected_id[i]).style['stroke-width']=2.0;
+   }
+	}
+	}
 
 	Data(data) {
 		this.data = data;

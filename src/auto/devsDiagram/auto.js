@@ -131,7 +131,7 @@ export default Lang.Templatable("Auto.DevsDiagram", class AutoDevsDiagram extend
 	onClick_Handler(ev) {
 		var s = this.Simulation;
 		var id=ev.selectedid;
-		var state_id = s.state.model[ev.selectedid];
+		//var state_id = s.state.model[ev.selectedid];
 		
 		var isSelected = this.Simulation.Selection.IsSelected(id);		
 	//console.log(state_id);
@@ -142,12 +142,12 @@ export default Lang.Templatable("Auto.DevsDiagram", class AutoDevsDiagram extend
 		} 
 		
 		else {
-			var fillstroke = 'black';
+		//	var fillstroke = 'black';
 			this.Simulation.Selection.Deselect(id);
 
 		}
 			
-			this.Widget.DrawSVGBorder(id,fillstroke);
+			this.Widget.DrawSVGBorder(s.Selection,fillstroke);
 	}
 
 	
