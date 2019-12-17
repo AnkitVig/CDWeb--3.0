@@ -12,3 +12,5 @@
 10. Setting can be configured as per preference or requirement through control widget.
 11. To view State Frequency Chart, enter the states to be monitored, click "Continue". The states will be represented in form of a bar graph.
 12. To view Model Tracking Chart, select the models from DEVS Diagram to be monitored.
+
+##*Demo Video : https://youtu.be/-XCs9xhjOSQ*
